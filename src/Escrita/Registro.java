@@ -99,4 +99,70 @@ public class Registro {
         }
         return sb.toString();
     }
+
+    public long tempoLeituraSequencialMilisegundos(Integer n) {
+        long startTime = System.currentTimeMillis();
+
+        File arq = new File(fileName);
+        long tamanho = arq.length();
+        tamanho = tamanho / 100 - 1;
+        Integer range = Long.valueOf(tamanho).intValue();
+        range -= n;
+
+        Random rand = new Random();
+        int registroASerLido = rand.nextInt(range + 1);
+
+        long offset = 100 * registroASerLido;
+
+        Integer nseqLido;
+        String conteudoLido;
+
+        try ( RandomAccessFile file = new RandomAccessFile(fileName, "r")) {
+            byte[] buffer = new byte[96];
+            for (int i = 0; i < n; i++) {
+                file.seek(offset);
+                nseqLido = file.readInt();
+                file.read(buffer, 0, 96);
+                conteudoLido = new String(buffer);
+            }
+        } catch (IOException e) {
+            System.out.println("erro ao ler registro");
+        }
+        long endTime = System.currentTimeMillis();
+        long duration = (endTime - startTime);
+
+        return duration;
+    }
+
+    public long tempoLeituraAleatoriaMilisegundos(Integer n) {
+        long startTime = System.currentTimeMillis();
+
+        File arq = new File(fileName);
+        long tamanho = arq.length();
+        tamanho = tamanho / 100 - 1;
+        Integer range = Long.valueOf(tamanho).intValue();
+
+        Random rand = new Random();
+
+        Integer nseqLido;
+        String conteudoLido;
+
+        try ( RandomAccessFile file = new RandomAccessFile(fileName, "r")) {
+            byte[] buffer = new byte[96];
+            for (int i = 0; i < n; i++) {
+                int registroASerLido = rand.nextInt(range + 1);
+                long offset = 100 * registroASerLido;
+                file.seek(offset);
+                nseqLido = file.readInt();
+                file.read(buffer, 0, 96);
+                conteudoLido = new String(buffer);
+            }
+        } catch (IOException e) {
+            System.out.println("erro ao ler registro");
+        }
+        long endTime = System.currentTimeMillis();
+        long duration = (endTime - startTime);
+
+        return duration;
+    }
 }
