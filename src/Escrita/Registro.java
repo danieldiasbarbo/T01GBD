@@ -125,8 +125,6 @@ public class Registro {
                 nseqLido = file.readInt();
                 file.read(buffer, 0, 96);
                 conteudoLido = new String(buffer);
-                System.out.println("regEx: "+(registroASerLido+i));
-                System.out.println("regLi: "+nseqLido);
             }
         } catch (IOException e) {
             System.out.println("erro ao ler registro");
@@ -158,8 +156,6 @@ public class Registro {
                 long offset = 100 * registroASerLido;
                 file.seek(offset);
                 nseqLido = file.readInt();
-                System.out.println("regEx: "+registroASerLido);
-                System.out.println("regLi: "+nseqLido);
                 file.read(buffer, 0, 96);
                 conteudoLido = new String(buffer);
                 file.getChannel().position(inicio.position());
