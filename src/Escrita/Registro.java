@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,11 +120,13 @@ public class Registro {
 
         try ( RandomAccessFile file = new RandomAccessFile(fileName, "r")) {
             byte[] buffer = new byte[96];
+            file.seek(offset);
             for (int i = 0; i < n; i++) {
-                file.seek(offset);
                 nseqLido = file.readInt();
                 file.read(buffer, 0, 96);
                 conteudoLido = new String(buffer);
+                System.out.println("regEx: "+(registroASerLido+i));
+                System.out.println("regLi: "+nseqLido);
             }
         } catch (IOException e) {
             System.out.println("erro ao ler registro");
@@ -149,16 +152,21 @@ public class Registro {
 
         try ( RandomAccessFile file = new RandomAccessFile(fileName, "r")) {
             byte[] buffer = new byte[96];
+            FileChannel inicio = file.getChannel();
             for (int i = 0; i < n; i++) {
                 int registroASerLido = rand.nextInt(range + 1);
                 long offset = 100 * registroASerLido;
                 file.seek(offset);
                 nseqLido = file.readInt();
+                System.out.println("regEx: "+registroASerLido);
+                System.out.println("regLi: "+nseqLido);
                 file.read(buffer, 0, 96);
                 conteudoLido = new String(buffer);
+                file.getChannel().position(inicio.position());
             }
         } catch (IOException e) {
             System.out.println("erro ao ler registro");
+
         }
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
