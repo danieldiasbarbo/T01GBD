@@ -39,6 +39,7 @@ public class Registro {
         tamanho = tamanho / 100;
         Integer proxNseq = Long.valueOf(tamanho).intValue();
         this.nseq = proxNseq;
+        this.content = this.geraConteudoAleatorio();
 
         try ( BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             gravaInteiro(proxNseq);
@@ -134,7 +135,7 @@ public class Registro {
 
         return duration;
     }
-
+   
     public long tempoLeituraAleatoriaMilisegundos(Integer n) {
         long startTime = System.currentTimeMillis();
 
@@ -168,5 +169,19 @@ public class Registro {
         long duration = (endTime - startTime);
 
         return duration;
+    }
+    
+    public Integer quantidadeRegistros(){
+        File arq = new File(fileName);
+        long tamanho = arq.length();
+        tamanho = tamanho / 100 - 1;
+        return Long.valueOf(tamanho).intValue();
+    }
+    
+    
+    @Override
+    public String toString(){
+        return "Nseq:" + this.nseq +"\n" + "Conteudo:" + this.content;
+        
     }
 }

@@ -5,7 +5,7 @@ public class Escrita {
     
     public static void main(String[] args) {
         Registro reg;
-        int nReg = 10000000;
+        int nReg = 1000;
         for (int i = 0; i <= nReg; i++) {
             reg = new Registro(i);
             reg.gravaRegistro();
