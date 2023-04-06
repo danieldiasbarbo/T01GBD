@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Leitura {
-    private static String fileName = "registros.txt";
+    private static String fileName = "registros";
     
     @SuppressWarnings("empty-statement")
-    public static void main(String[] args) { 
+    public static void main(String args) { 
         Registro reg = new Registro();
         Random rand = new Random();
         System.out.println("TESTE DE LEITURA: ");

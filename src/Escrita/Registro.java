@@ -16,7 +16,7 @@ public class Registro {
 
     public Integer nseq;
     public String content;
-    public static String fileName = "registros.txt";
+    public static String fileName = "registros";
 
     public Registro() {
         this.nseq = 0;
@@ -112,7 +112,7 @@ public class Registro {
         range -= n;
 
         Random rand = new Random();
-        int registroASerLido = rand.nextInt(range + 1);
+        int registroASerLido = rand.nextInt((int) (tamanho + 1));
 
         long offset = 100 * registroASerLido;
 
@@ -142,7 +142,7 @@ public class Registro {
         File arq = new File(fileName);
         long tamanho = arq.length();
         tamanho = tamanho / 100 - 1;
-        Integer range = Long.valueOf(tamanho).intValue();
+        Integer range = (int) tamanho;
 
         Random rand = new Random();
 
@@ -175,7 +175,7 @@ public class Registro {
         File arq = new File(fileName);
         long tamanho = arq.length();
         tamanho = tamanho / 100 - 1;
-        return Long.valueOf(tamanho).intValue();
+        return (int) tamanho;
     }
     
     
