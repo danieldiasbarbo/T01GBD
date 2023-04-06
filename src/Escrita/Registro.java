@@ -174,6 +174,7 @@ public class Registro {
     public Integer quantidadeRegistros(){
         File arq = new File(fileName);
         long tamanho = arq.length();
+        System.out.println("dentro func"+tamanho);
         tamanho = tamanho / 100 - 1;
         return (int) tamanho;
     }

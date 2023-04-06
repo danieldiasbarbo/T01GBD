@@ -12,6 +12,7 @@ public class Leitura {
         Random rand = new Random();
         System.out.println("TESTE DE LEITURA: ");
         for (int i = 0; i < 3; i++) {
+            System.out.println(reg.quantidadeRegistros());
             int nseqASerLido = rand.nextInt(reg.quantidadeRegistros() + 1);
             reg.leRegistro(nseqASerLido);
             System.out.println("Nseq Esperado: " + nseqASerLido);
